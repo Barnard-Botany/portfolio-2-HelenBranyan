@@ -479,6 +479,72 @@ jaccard
 bray = vegdist(wab, "bray")
 bray
 ```
+```{r}
+#library("bien")
+#As you know, you can obtain species occurrence data from the BIEN database, or from another even more comprehensive data base called gbif (gbif.org). Occurrence data is a type of abundance data, and it can also be used to figure out presence-absence data. 
+park <- BIEN_occurrence_county(country="United States", state="Wyoming", county = "Park")
+head(park)
+tail(park)
+gallatin <- BIEN_occurrence_county(country="United States", state="Montana", county = "Gallatin")
+head(gallatin)
+tail(gallatin)
+attributes(gallatin)
+fremont <- BIEN_occurrence_county(country="United States", state="Idaho", county = "Fremont")
+head(fremont)
+tail(fremont)
+attributes(fremont)
+```
+
+```{r}
+#library(BIEN)
+#We previously learned to "slim down" data sets to one or a few variables, which we can do here
+park.occ=park[c(1)]
+head(park.occ)
+gallatin.occ=gallatin[c(1)]
+head(gallatin.occ)
+fremont.occ=fremont[c(1)]
+head(fremont.occ)
+#These are now two species occurrence lists, one for The Bronx, one for Manhattan
+#To turn them into species lists with abundance data, you can recycle the code from above.
+park.ab=count(park.occ)
+head(park.ab)
+gallatin.ab=count(gallatin.occ)
+head(gallatin.ab)
+fremont.ab=count(fremont.occ)
+head(fremont.ab)
+#Then re-name the columns as previously. Here just the Bronx
+park.ab=data.frame("park", park.ab)
+head(park.ab)
+names(park.ab)<-c("ListID", "SpeciesID", "Freq")
+head(park.ab)
+gallatin.ab=data.frame("gallatin", gallatin.ab)
+head(gallatin.ab)
+names(gallatin.ab)<-c("ListID", "SpeciesID", "Freq")
+head(gallatin.ab)
+fremont.ab=data.frame("fremont", fremont.ab)
+head(fremont.ab)
+names(fremont.ab)<-c("ListID", "SpeciesID", "Freq")
+head(fremont.ab)
+threecounty.ab=rbind(park.ab, gallatin.ab, fremont.ab)
+head(threecounty.ab)
+tail(threecounty.ab)
+dim(threecounty.ab)
+#This powerful function matrify is going to convert this list of species with their site-specific abundances into a matrix with the species as the column headings, the rows as the samples. This gives a long sample list
+urban.ab<-matrify(threecounty.ab)
+urban.ab
+#If we look at the dimensions of this matrix, what does it mean? What is 2? What is 9?
+dim(urban.ab)
+simpson<-diversity(urban.ab, index = "simpson")
+shannon<-diversity(urban.ab, index = "shannon")
+simpson
+shannon
+bray = vegdist(urban.ab, "bray")
+bray
+jaccard = vegdist(urban.ab, "jaccard", binary=T)
+jaccard
+
+
+```
 
 ## How to finish this portfolio
 
