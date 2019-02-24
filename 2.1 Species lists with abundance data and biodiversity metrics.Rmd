@@ -479,6 +479,9 @@ jaccard
 bray = vegdist(wab, "bray")
 bray
 ```
+
+#here is my martix for yellowstone park 
+
 ```{r}
 #library("bien")
 #As you know, you can obtain species occurrence data from the BIEN database, or from another even more comprehensive data base called gbif (gbif.org). Occurrence data is a type of abundance data, and it can also be used to figure out presence-absence data. 
@@ -544,6 +547,42 @@ jaccard = vegdist(urban.ab, "jaccard", binary=T)
 jaccard
 
 
+```
+
+#here is my matrix for a list of plants of Mannahatta and Plant-O-Matic
+```{r}
+MH=read.csv("Mannahatta list .csv")
+head(MH)
+tail(MH)
+```
+```{r}
+MH_list=count(speciesID)
+head(MH_list)
+MH_list=data.frame(MH_list)
+MH_list=data.frame("MH", MH_list)
+head(MH_list)
+```
+```{r}
+#Now I'm going to give them headings, just as we did earlier
+names(MH_list)<-c("ListID", "SpeciesID", "Freq")
+```
+```{r}
+#Now I'm going to repeat that for my second sample
+PEM=read.csv("Plant-O-Matic list.csv")
+head(PEM)
+tail(PEM)
+speciesID=paste(PEM$Scientific, PEM$Name, sep=" ")
+speciesID
+PEM_list=count(speciesID)
+head(PEM_list)
+PEM_list=data.frame("PEM", PEM_list)
+names(PEM_list)<-c("ListID", "SpeciesID", "Freq")
+```
+```{r}
+Plants2=rbind(PEM_list, MH_list)
+dim(Plants2)
+wab=matrify(PLants2)
+wab
 ```
 
 ## How to finish this portfolio
