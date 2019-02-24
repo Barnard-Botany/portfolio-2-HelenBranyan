@@ -556,32 +556,33 @@ head(MH)
 tail(MH)
 ```
 ```{r}
-MH_list=count(speciesID)
+#Just as we did before, let's count how often each species is in the occurrence list.
+MH_list=count(MH)
 head(MH_list)
 MH_list=data.frame(MH_list)
 MH_list=data.frame("MH", MH_list)
 head(MH_list)
 ```
 ```{r}
-#Now I'm going to give them headings, just as we did earlier
-names(MH_list)<-c("ListID", "SpeciesID", "Freq")
+#How about if you have another file? 
+POM=read.csv("Plant-O-Matic list.csv")
+head(POM)
+tail(POM)
 ```
 ```{r}
-#Now I'm going to repeat that for my second sample
-PEM=read.csv("Plant-O-Matic list.csv")
-head(PEM)
-tail(PEM)
-speciesID=paste(PEM$Scientific, PEM$Name, sep=" ")
-speciesID
-PEM_list=count(speciesID)
-head(PEM_list)
-PEM_list=data.frame("PEM", PEM_list)
-names(PEM_list)<-c("ListID", "SpeciesID", "Freq")
+#Just as we did before, let's count how often each species is in the occurrence list.
+POM_list=count(POM)
+head(POM_list)
+POM_list=data.frame(POM_list)
+POM_list=data.frame("POM", POM_list)
+head(POM_list)
 ```
 ```{r}
-Plants2=rbind(PEM_list, MH_list)
-dim(Plants2)
-wab=matrify(PLants2)
+#And if I combine my two lists into one
+Helen2=rbind(POM_list, MH_list)
+dim(Helen2)
+#And run the matrify function
+wab=matrify(Helen2)
 wab
 ```
 
