@@ -539,7 +539,7 @@ jaccard
 
 
 ```
-# it is not surpirising that there is quite a bit of overlap between the species occuring in the three counties, as they are physically very close to each other and the wildlife has been generally undistrubed by humans (national parks are well protected/preserved). 
+# it is not surpirising that there is quite a bit of overlap between the species occuring in the three counties, as they are physically very close to each other and the wildlife has been generally undistrubed by humans (national parks are well protected/preserved). However, there is less diversity in flora between park and gallatin than expected, especially for the Simpson's index (.36). 
 
 #here is my matrix for a list of plants of Mannahatta and Plant-O-Matic
 
